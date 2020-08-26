@@ -31,39 +31,63 @@ The script supports command line options and parameters which can help you custo
 ## FAQ
 
 **Q:** Can I run the script safely?  
+**Q:** 我能安全地运行脚本吗?  
+**A:** 绝对不是，你必须了解每个函数的作用和运行后对你的电脑产生的影响。有些函数会降低安全性，隐藏控制或者卸载程序 **如果你不确定脚本的作用，请不要运行它！**
 **A:** Definitely not. You have to understand what the functions do and what will be the implications for you if you run them. Some functions lower security, hide controls or uninstall applications. **If you're not sure what the script does, do not attempt to run it!**
 
 **Q:** Can I run the script repeatedly?  
+**Q:** 我可以重复运行脚本吗?  
+**A:** 当然可以！事实上这个脚本正是为了支持这个功能才编写的，因为每个大版本的 Windows 更新之后有些设置被重置并不少见。
 **A:** Yes! In fact the script has been written to support exactly that, as it's not uncommon that big Windows Updates reset some of the settings.
 
 **Q:** Which versions and editions of Windows are supported?  
+**Q:** 支持什么版本的 Windows ?  
+**A:** 脚本的目标是完全兼容从半年频道获取更新的最新的 64 位 Windows 10。但是如果您创建了您自己的预设并排除了不兼容的调整，它可能可以在 LTSB/LTSC 和 32 位系统上。绝大多数的调整可以在所有的 Windows 版本上生效。一些调整依赖于组策略设置，所以对家庭版和教育版可能有一些限制。
 **A:** The script aims to be fully compatible with the most up-to-date 64bit version of Windows 10 receiving updates from semi-annual channel, however if you create your own preset and exclude the incompatible tweaks, it will work also on LTSB/LTSC and possibly also on 32bit systems. Vast majority of the tweaks will work on all Windows editions. Some of them rely on group policy settings, so there may be a few limitations for Home and Education editions.
 
 **Q:** Can I run the script on Windows Server 2016 or 2019?  
+**Q:** 我可以在 Windows Server 2016 或者 2019 上运行这个脚本吗?  
+**A:** 是的。从 2.5 版本开始支持在 Windows Server 上运行，甚至还有一些特定针对服务器的调整。但是请记住，这个脚本主要还是为 Windows 10 设计的，所以你必须创建您自己的预设。
 **A:** Yes. Starting from version 2.5, Windows Server is supported. There are even few tweaks specific to Server environment. Keep in mind though, that the script is still primarily designed for Windows 10, so you have to create your own preset.
 
 **Q:** Can I run the script on Windows 7, 8, 8.1 or other versions of Windows?  
+**Q:** 我可以在 Windows 7, 8, 8.1 或者其他版本的 Windows 上运行这个脚本吗?  
+**A:** 不可以。尽管有些调整依旧可以在其他版本的 Windows 上生效，但是这个脚本仅为 Windows 10 和 Windows Server 2016 / 2019 编写的。没有任何计划为旧版本提供支持。
 **A:** No. Although some tweaks may work also on older versions of Windows, the script is developed only for Windows 10 and Windows Server 2016 / 2019. There are no plans to support older versions.
 
 **Q:** Can I run the script in multi-user environment?  
+**Q:** 我可以在多用户环境中运行这个脚本吗?  
+**A:** 是的，在一定程度上。一些调整（最主要的是 UI 调整）只针对当前执行脚本的用户生效。如上所述，脚本可以重复运行，因此你可以用不同的用户身份多次运行这个脚本使其在多用户下生效。由于 Windows 中的身份验证和提权机制，大部分的调整只能在属于*管理员*组的用户下生效。标准用户会收到 UAC 提示要求提供管理员凭证，导致调整在给定的管理员账户下生效而非当前的非特权标准用户。有一些方法可以在程序上规避这个问题，但是我不打算提供任何方法，因为这些方法会对代码的复杂性和可读性产生负面影响。如果你还想在多用户下尝试运行这个脚本，请参阅在[issue #29](https://github.com/Disassembler0/Win10-Initial-Setup-Script/issues/29#issuecomment-333040591)中的回答以获得一些提示。
 **A:** Yes, to certain extent. Some tweaks (most notably UI tweaks) are set only for the user currently executing the script. As stated above, the script can be run repeatedly; therefore it's possible to run it multiple times, each time as different user. Due to the nature of authentication and privilege escalation mechanisms in Windows, most of the tweaks can be successfully applied only by users belonging to *Administrators* group. Standard users will get an UAC prompt asking for admin credentials which then causes the tweaks to be applied to the given admin account instead of the original non-privileged one. There are a few ways how this can be circumvented programmatically, but I'm not planning to include any as it would negatively impact code complexity and readability. If you still wish to try to use the script in multi-user environment, check [this answer in issue #29](https://github.com/Disassembler0/Win10-Initial-Setup-Script/issues/29#issuecomment-333040591) for some pointers.
 
 **Q:** Did you test the script?  
+**Q:** 你测试过这个脚本吗? 
+**A:** 当然。我在虚拟机中的最新版本的 64 位 Windows 家庭版和企业版测试新增加的内容。在所有的大版本的更新之后，我也经常在我所有的家庭安装中使用它。
 **A:** Yes. I'm testing new additions on up-to-date 64bit Home and Enterprise editions in VMs. I'm also regularly using it for all my home installations after all bigger updates.
 
 **Q:** I've run the script and it did something I don't like, how can I undo it?  
+**Q:** 我运行了脚本但是我不喜欢这些更改，我该如何撤销?  
+**A:** 对于每个调整，也有相应的函数恢复默认设置。默认值是被认为是新安装的 Windows 10 或 Windows Server 2016，在安装过程中或安装后没有进行任何调整。使用调整功能来创建和运行新的预设。另外，由于有些功能只是自动化的动作，可以使用 GUI 来完成，所以找到相应的空间，手动修改即可。
 **A:** For every tweak, there is also a corresponding function which restores the default settings. The default is considered freshly installed Windows 10 or Windows Server 2016 with no adjustments made during or after the installation. Use the tweaks to create and run new preset. Alternatively, since some functions are just automation for actions which can be done using GUI, find appropriate control and modify it manually.
 
 **Q:** I've run the script and some controls are now greyed out and display message "*Some settings are hidden or managed by your organization*", why?  
+**Q:**我运行了这个脚本之后，现在有些控件是灰色的，并显示“某些设置被您的组织隐藏或管理”的消息，为什么？ 
+**A:** 为了保证整个系统内何以顺利可靠地应用这些调整，有些调整利用了 *组策略*（*GPO*）。在公司大规模的管理计算机中也采用了同样的机制，所以没有管理权限的用户无法更改设置。如果你想改变被 GPO 锁定的设置，应用相应的还原调整，控件就可以恢复使用了。
 **A:** To ensure that system-wide tweaks are applied smoothly and reliably, some of them make use of *Group Policy Objects* (*GPO*). The same mechanism is employed also in companies managing their computers in large scale, so the users without administrative privileges can't change the settings. If you wish to change a setting locked by GPO, apply the appropriate restore tweak and the control will become available again.
 
+**Q:** 我运行了这个脚本然后它破坏了我的电脑、杀了我邻居的狗、引发了第三次世界大战。
 **Q:** I've run the script and it broke my computer / killed neighbor's dog / caused world war 3.  
+**A:** 我不关心这个问题。另外，这不是一个问题。
 **A:** I don't care. Also, that's not a question.
 
 **Q:** I'm using a tweak for &lt;feature&gt; on my installation, can you add it?  
+**Q:** 在我的安装中我使用了一个调整，你能添加它吗?  
+**A:** 提交一个 PR ,创建一个功能请求的 issue 或者给我留言。如果我发现这个功能简单有用，而且不依赖任何第三方模块或者可执行文件（包括 *Chovolatey*，*NuGet*, *Ninite* 或者其他自动化解决方案），我有可能会添加它。
 **A:** Submit a PR, create a feature request issue or drop me a message. If I find the functionality simple, useful and not dependent on any 3rd party modules or executables (including also *Chocolatey*, *NuGet*, *Ninite* or other automation solutions), I might add it.
 
 **Q:** Can I use the script or modify it for my / my company's needs?  
+**Q:** 我可以根据我或者我公司的需求使用或者修改这个脚本吗?  
+**A:** 当然可以。请自便。
 **A:** Sure, knock yourself out. Just don't forget to include copyright notice as per MIT license requirements. I'd also suggest including a link to this GitHub repo as it's very likely that something will be changed, added or improved to keep track with future versions of Windows 10.
 
 **Q:** Why are there repeated pieces of code throughout some functions?  
