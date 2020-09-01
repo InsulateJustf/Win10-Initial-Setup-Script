@@ -1,0 +1,55 @@
+##########
+# Win 10 / Server 2016 / Server 2019 Initial Setup Script - Default preset
+# Author: Disassembler <disassembler@dasm.cz>
+# Version: v3.10, 2020-07-15
+# Source: https://github.com/Disassembler0/Win10-Initial-Setup-Script
+##########
+
+### Require administrator privileges ###
+RequireAdmin
+
+### Privacy Tweaks ###
+DisableTelemetry
+DisableCortana
+DisableAppSuggestions
+DisableFeedback
+DisableErrorReporting
+DisableDiagTrack
+
+### Security Tweaks ###
+HideDefenderTrayIcon
+
+### Network Tweaks ###
+SetCurrentNetworkPrivate
+EnableRemoteDesktop
+DisableRemoteAssistance
+
+### Service Tweaks ###
+EnableUpdateMSProducts
+DisableUpdateRestart
+DisableAutoplay
+DisableAutorun
+EnableNTFSLongPaths
+EnableClipboardHistory
+DisableDefragmentation
+
+### UI Tweaks ###
+DisableAccessibilityKeys
+ShowTaskManagerDetails
+ShowFileOperationsDetails
+HideTaskbarSearch
+AddENKeyboard
+
+### Explorer UI Tweaks ###
+ShowKnownExtensions
+SetExplorerThisPC
+Hide3DObjectsFromThisPC 
+
+### Application Tweaks ###
+DisableIEFirstRun
+InstallLinuxSubsystem
+InstallHyperV
+
+### Auxiliary Functions ###
+WaitForKey
+Restart
